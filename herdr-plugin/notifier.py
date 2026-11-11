@@ -46,7 +46,7 @@ DEFAULT_CONFIG = {
     # Notification flags
     "notify_on_working": False,       # keep clock visible; only alert on done / blocked
     "notify_on_error": True,
-    "include_workspace": True,        # include short project tag like [v]AGY:S3
+    "include_workspace": False,       # False: [v]AGY (30 cols), True: [v]S3 or [v]AGY:S3
     "use_hardware_clock": True,       # let ESP32 hardware NTP/RTC drive the clock locally
     "clock_revert_seconds": 25,       # revert to digital clock after 25s
     "cooldown_seconds": 3.0,
@@ -608,7 +608,7 @@ def cmd_status():
 
 def cmd_test_done():
     config = load_config()
-    include_ws = config.get("include_workspace", True)
+    include_ws = config.get("include_workspace", False)
     ws_suffix = ":S3" if include_ws else ""
     msg = f"[v]AGY{ws_suffix}"
     eff = config.get("effect_done", "opening")
@@ -620,7 +620,7 @@ def cmd_test_done():
 
 def cmd_test_blocked():
     config = load_config()
-    include_ws = config.get("include_workspace", True)
+    include_ws = config.get("include_workspace", False)
     ws_suffix = ":S3" if include_ws else ""
     msg = f"! AGY{ws_suffix} !" if ws_suffix else "! AGY !"
     eff = config.get("effect_blocked", config.get("effect_attention", "scroll_down"))
@@ -632,7 +632,7 @@ def cmd_test_blocked():
 
 def cmd_test_working():
     config = load_config()
-    include_ws = config.get("include_workspace", True)
+    include_ws = config.get("include_workspace", False)
     ws_suffix = ":S3" if include_ws else ""
     msg = f"> AGY{ws_suffix}" if ws_suffix else "> AGY"
     eff = config.get("effect_working", "wipe")
@@ -644,7 +644,7 @@ def cmd_test_working():
 
 def cmd_test_error():
     config = load_config()
-    include_ws = config.get("include_workspace", True)
+    include_ws = config.get("include_workspace", False)
     ws_suffix = ":S3" if include_ws else ""
     msg = f"X AGY{ws_suffix}" if ws_suffix else "X AGY"
     eff = config.get("effect_error", "blinds")
