@@ -1,0 +1,23 @@
+# PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Python cache & state
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+*.pid
+last_known_ip.txt
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride

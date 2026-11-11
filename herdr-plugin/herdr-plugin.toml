@@ -1,0 +1,59 @@
+id = "gs.matrix-notifier"
+name = "Matrix Display Notifier"
+version = "0.1.0"
+min_herdr_version = "0.8.0"
+description = "Push agent done and needs-attention alerts to MAX7219 matrix display at http://matrix-display.local/"
+platforms = ["macos", "linux"]
+
+[[startup]]
+command = ["python3", "notifier.py", "start"]
+platforms = ["macos", "linux"]
+
+[[actions]]
+id = "start"
+title = "Start Matrix Notifier"
+contexts = ["workspace"]
+command = ["python3", "notifier.py", "start"]
+platforms = ["macos", "linux"]
+
+[[actions]]
+id = "stop"
+title = "Stop Matrix Notifier"
+contexts = ["workspace"]
+command = ["python3", "notifier.py", "stop"]
+platforms = ["macos", "linux"]
+
+[[actions]]
+id = "status"
+title = "Matrix Notifier Status"
+contexts = ["workspace"]
+command = ["python3", "notifier.py", "status"]
+platforms = ["macos", "linux"]
+
+[[actions]]
+id = "test-done"
+title = "Test: Agent Done Alert"
+contexts = ["workspace"]
+command = ["python3", "notifier.py", "test-done"]
+platforms = ["macos", "linux"]
+
+[[actions]]
+id = "test-blocked"
+title = "Test: Agent Attention Alert"
+contexts = ["workspace"]
+command = ["python3", "notifier.py", "test-blocked"]
+platforms = ["macos", "linux"]
+
+[[actions]]
+id = "test-working"
+title = "Test: Agent Working Alert"
+contexts = ["workspace"]
+command = ["python3", "notifier.py", "test-working"]
+platforms = ["macos", "linux"]
+
+[[actions]]
+id = "test-error"
+title = "Test: Agent Error Alert"
+contexts = ["workspace"]
+command = ["python3", "notifier.py", "test-error"]
+platforms = ["macos", "linux"]
