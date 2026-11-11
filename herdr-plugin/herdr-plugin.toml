@@ -1,8 +1,8 @@
 id = "gs.matrix-notifier"
 name = "Matrix Display Notifier"
-version = "0.1.0"
+version = "0.2.0"
 min_herdr_version = "0.8.0"
-description = "Push agent done and needs-attention alerts to MAX7219 matrix display at http://matrix-display.local/"
+description = "Push agent done and needs-attention alerts with distinct animations to MAX7219 matrix display at http://matrix-display.local/"
 platforms = ["macos", "linux"]
 
 [[startup]]
@@ -25,35 +25,63 @@ platforms = ["macos", "linux"]
 
 [[actions]]
 id = "status"
-title = "Matrix Notifier Status"
+title = "Matrix Notifier Status & Health"
 contexts = ["workspace"]
 command = ["python3", "notifier.py", "status"]
 platforms = ["macos", "linux"]
 
 [[actions]]
+id = "clock"
+title = "Switch Display to Clock"
+contexts = ["workspace"]
+command = ["python3", "notifier.py", "clock"]
+platforms = ["macos", "linux"]
+
+[[actions]]
+id = "dim"
+title = "Dim Matrix Display (Night Mode)"
+contexts = ["workspace"]
+command = ["python3", "notifier.py", "dim"]
+platforms = ["macos", "linux"]
+
+[[actions]]
+id = "bright"
+title = "Brighten Matrix Display (Day Mode)"
+contexts = ["workspace"]
+command = ["python3", "notifier.py", "bright"]
+platforms = ["macos", "linux"]
+
+[[actions]]
 id = "test-done"
-title = "Test: Agent Done Alert"
+title = "Test: Agent Done Alert (Opening)"
 contexts = ["workspace"]
 command = ["python3", "notifier.py", "test-done"]
 platforms = ["macos", "linux"]
 
 [[actions]]
 id = "test-blocked"
-title = "Test: Agent Attention Alert"
+title = "Test: Agent Attention Alert (Slide Down)"
 contexts = ["workspace"]
 command = ["python3", "notifier.py", "test-blocked"]
 platforms = ["macos", "linux"]
 
 [[actions]]
 id = "test-working"
-title = "Test: Agent Working Alert"
+title = "Test: Agent Working Alert (Wipe)"
 contexts = ["workspace"]
 command = ["python3", "notifier.py", "test-working"]
 platforms = ["macos", "linux"]
 
 [[actions]]
 id = "test-error"
-title = "Test: Agent Error Alert"
+title = "Test: Agent Error Alert (Blinds)"
 contexts = ["workspace"]
 command = ["python3", "notifier.py", "test-error"]
+platforms = ["macos", "linux"]
+
+[[actions]]
+id = "ota"
+title = "Flash Firmware Wirelessly (OTA)"
+contexts = ["workspace"]
+command = ["python3", "notifier.py", "ota"]
 platforms = ["macos", "linux"]
