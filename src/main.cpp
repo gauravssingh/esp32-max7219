@@ -1279,10 +1279,22 @@ void setup() {
   g_server.on("/api/config", HTTP_POST, handleConfig);
 
   // Web OTA firmware update endpoint
+  g_server.on("/update", HTTP_GET, []() {
+    g_server.send(200, "text/html",
+      "<!DOCTYPE html><html><head><meta charset='utf-8'><title>OTA Update</title>"
+      "<style>body{background:#0d1117;color:#e6edf3;font-family:sans-serif;padding:30px;max-width:500px;margin:auto}"
+      ".card{background:#161b22;border:1px solid #30363d;padding:24px;border-radius:8px}"
+      "input[type=file]{margin:16px 0;width:100%}button{background:#238636;color:#fff;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-weight:600}"
+      "</style></head><body><div class='card'><h2>MAX7219 OTA Firmware Update</h2>"
+      "<form method='POST' action='/update' enctype='multipart/form-data'>"
+      "<input type='file' name='update' accept='.bin' required><br>"
+      "<button type='submit'>Flash Firmware</button></form></div></body></html>");
+  });
   g_server.on("/update", HTTP_POST, []() {
+    bool ok = !Update.hasError();
     g_server.sendHeader("Connection", "close");
-    g_server.send(200, "application/json", Update.hasError() ? "{\"ok\":false,\"err\":\"flash_failed\"}" : "{\"ok\":true,\"reboot\":true}");
-    if (!Update.hasError()) {
+    g_server.send(200, "application/json", ok ? "{\"ok\":true,\"reboot\":true}" : "{\"ok\":false,\"err\":\"flash_failed\"}");
+    if (ok) {
       delay(500);
       ESP.restart();
     }

@@ -62,7 +62,7 @@ DEFAULT_CONFIG = {
     # Notification flags
     "notify_on_working": False,       # keep clock visible; only alert on done / blocked
     "notify_on_error": True,
-    "use_hardware_clock": False,      # False pushes clean HH:MM; True hands over to NTP RTC
+    "use_hardware_clock": True,       # True hands over timekeeping autonomously to ESP32 NTP RTC
     "clock_revert_seconds": 25,       # revert to digital clock after 25s
     "cooldown_seconds": 3.0,
     "quiet_agents": []
