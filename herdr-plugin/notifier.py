@@ -47,7 +47,7 @@ DEFAULT_CONFIG = {
     "notify_on_working": False,       # keep clock visible; only alert on done / blocked
     "notify_on_error": True,
     "include_workspace": False,       # False: [v]AGY (30 cols), True: [v]S3 or [v]AGY:S3
-    "use_hardware_clock": True,       # let ESP32 hardware NTP/RTC drive the clock locally
+    "use_hardware_clock": False,      # False: pushes HH:MM so seconds are never shown on display
     "clock_revert_seconds": 25,       # revert to digital clock after 25s
     "cooldown_seconds": 3.0,
     "quiet_agents": []
@@ -458,7 +458,8 @@ class NotifierDaemon:
                     if self.clock_revert_time > 0 and now_ts >= self.clock_revert_time:
                         self.clock_revert_time = 0
                         revert_to_clock(self.config)
-                    elif not self.config.get("use_hardware_clock", True) and self.clock_revert_time == 0:
+                        self.last_clock_minute = time.strftime("%H:%M")
+                    elif not self.config.get("use_hardware_clock", False) and self.clock_revert_time == 0:
                         cur_min = time.strftime("%H:%M")
                         if cur_min != self.last_clock_minute:
                             revert_to_clock(self.config)
